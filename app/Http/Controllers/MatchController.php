@@ -43,6 +43,14 @@ class MatchController extends Controller
             ->intersectByKeys(collect($similarMovies2)->keyBy('id')
         )->values()->all();
 
+        if(empty($commonMovies)){
+            $commonMovies = collect($similarMovies1)->keyBy('id')
+                ->merge(collect($similarMovies2)->keyBy('id'))
+                ->unique('id')
+                ->values()
+                ->all();
+        }
+
         return view('movies.match', ['movies' => $commonMovies]);
     }
 
@@ -65,17 +73,24 @@ class MatchController extends Controller
     }
 
     private function getSimilarMovies($movieId)
-    {
-        $url="https://api.themoviedb.org/3/movie/$movieId/similar?";
-        $response = Http::get($url, [
-            'api_key' => env('TMDB_API_KEY'),
-            'language' => 'es_MX',
-        ]);
-        //dd($response);
-        
+{
+    $url = "https://api.themoviedb.org/3/movie/$movieId/similar";
+    $response = Http::get($url, [
+        'api_key' => env('TMDB_API_KEY'),
+        'language' => 'es_MX',
+    ]);
 
-        return $response->json()['results'] ?? [];
-    }
+    // Obtener los resultados de la respuesta
+    $movies = $response->json()['results'] ?? [];
+
+    // Ordenar las películas por popularidad en orden descendente
+    usort($movies, function ($a, $b) {
+        return $b['popularity'] <=> $a['popularity'];
+    });
+
+    return $movies;
+}
+
 
     public function searchmatch(Request $request)
 {
