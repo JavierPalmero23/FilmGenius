@@ -1,28 +1,38 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <div class="container py-5">
-        <div class="row justify-content-center mb-4">
-            <div class="col-md-8">
-                <div class="card p-4 shadow-lg">
-                    <h3 class="text-center mb-4">Encuentra Películas en Común</h3>
-                    <form action="<?php echo e(route('match.search')); ?>" method="POST" class="row g-3">
-                        <?php echo csrf_field(); ?>
-                        <div class="col-md-6">
-                            <label for="movie1" class="form-label">Selecciona tu película:</label>
-                            <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie1')); ?>" required>
+<div class="container py-5">
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-8">
+            <div class="card p-4 shadow-lg">
+                <h3 class="text-center mb-4">Encuentra Películas en Común</h3>
+                <form action="<?php echo e(route('match.search')); ?>" method="POST" class="row g-3">
+                    <?php echo csrf_field(); ?>
+                    <div class="col-md-6 position-relative">
+                        <label for="movie1" class="form-label">Selecciona tu película:</label>
+                        <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie1')); ?>" required>
+                        <div id="movie1-loading" class="loading-spinner d-none position-absolute top-50 end-0 translate-middle">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Cargando...</span>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="movie2" class="form-label">Seleccionar una película:</label>
-                            <input type="text" name="movie2" id="movie2" class="form-control" placeholder="Buscar película" required>
+                    </div>
+                    <div class="col-md-6 position-relative">
+                        <label for="movie2" class="form-label">Seleccionar una película:</label>
+                        <input type="text" name="movie2" id="movie2" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie2')); ?>" required>
+                        <div id="movie2-loading" class="loading-spinner d-none position-absolute top-50 end-0 translate-middle">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="sr-only">Cargando...</span>
+                            </div>
                         </div>
-                        <div class="col-12 text-center mt-4">
-                            <button type="submit" class="btn btn-primary px-5">Buscar Películas en Común</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary px-5">Buscar Películas en Común</button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
     <div class="row">
         <?php if(isset($movies)): ?>
@@ -34,14 +44,11 @@
                                 <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="card-img-top" alt="<?php echo e($movie['title']); ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo e($movie['title']); ?></h5>
-                                    <p class="card-text">
-                                        Rating: <?php echo e(number_format($movie['vote_average'], 1)); ?>/10
-                                    </p>
+                                    <p class="card-text">Rating: <?php echo e(number_format($movie['vote_average'], 1)); ?>/10</p>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <!-- Modal -->
                     <div class="modal fade" id="movieModal<?php echo e($movie['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel<?php echo e($movie['id']); ?>" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -65,44 +72,50 @@
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <?php else: ?>
-                <p>No se encontraron películas en común.</p>
+                <p class="text-muted">No se encontraron películas en común.</p>
             <?php endif; ?>
         <?php endif; ?>
     </div>
+</div>
 
-    <script>
-        $(function() {
-            // Función para obtener sugerencias
-            function fetchSuggestions(request, response) {
-                $.ajax({
-                    url: 'https://api.themoviedb.org/3/search/movie',
-                    dataType: 'json',
-                    data: {
-                        api_key: '<?php echo e(env('TMDB_API_KEY')); ?>',
-                        query: request.term
-                    },
-                    success: function(data) {
-                        response(data.results.map(function(movie) {
-                            return {
-                                label: movie.title,
-                                value: movie.title,
-                                id: movie.id
-                            };
-                        }));
-                    }
-                });
-            }
-
-            // Configuración de autocompletado
-            $("#movie1, #movie2").autocomplete({
-                source: fetchSuggestions,
-                select: function(event, ui) {
-                    // Puedes usar ui.item.id para enviar el id de la película si es necesario
-                    console.log("Selected movie ID:", ui.item.id);
+<script>
+    $(document).ready(function() {
+        // Función para obtener sugerencias de películas
+        function fetchSuggestions(request, response) {
+            $.ajax({
+                url: 'https://api.themoviedb.org/3/search/movie',
+                dataType: 'json',
+                data: {
+                    api_key: '<?php echo e(env('TMDB_API_KEY')); ?>',
+                    query: request.term
+                },
+                success: function(data) {
+                    response($.map(data.results, function(movie) {
+                        return {
+                            label: movie.title,
+                            value: movie.title,
+                            id: movie.id
+                        };
+                    }));
+                },
+                error: function() {
+                    console.log('Error al obtener sugerencias');
                 }
             });
+        }
+
+        // Configuración de autocompletado para ambas casillas
+        $("#movie1, #movie2").autocomplete({
+            source: fetchSuggestions,
+            select: function(event, ui) {
+                console.log("Selected movie ID:", ui.item.id);
+            },
+            minLength: 3, // Empieza a sugerir después de escribir 3 caracteres
+            delay: 300 // Retardo para mostrar sugerencias
         });
-    </script>
+    });
+</script>
+
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\jp23\Desktop\FilmGenius\resources\views/movies/match.blade.php ENDPATH**/ ?>
