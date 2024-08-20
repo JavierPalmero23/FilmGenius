@@ -10,7 +10,11 @@
                     @csrf
                     <div class="col-md-6 position-relative">
                         <label for="movie1" class="form-label">Selecciona tu película:</label>
+                        @if(request('movie1'))
                         <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="{{ request('movie1') }}" required>
+                        @else
+                        <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" required>
+                        @endif
                         <div id="movie1-loading" class="loading-spinner d-none position-absolute top-50 end-0 translate-middle">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="sr-only">Cargando...</span>

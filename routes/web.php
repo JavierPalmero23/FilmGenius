@@ -12,12 +12,13 @@ Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
 use App\Http\Controllers\MatchController;
+Route::middleware('auth')->group(function () {
 Route::get('/match', [MatchController::class, 'showForm'])->name('match.form');
 Route::post('/match/search', [MatchController::class, 'search'])->name('match.search');
 
 Route::get('/match', [MatchController::class, 'index'])->name('match.index');
 Route::post('/match/search', [MatchController::class, 'search'])->name('match.search');
-
+});
 /*
 Route::get('/movies', function () {
     return view('movies');

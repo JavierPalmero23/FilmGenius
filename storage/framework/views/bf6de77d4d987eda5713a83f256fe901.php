@@ -10,7 +10,11 @@
                     <?php echo csrf_field(); ?>
                     <div class="col-md-6 position-relative">
                         <label for="movie1" class="form-label">Selecciona tu película:</label>
+                        <?php if(request('movie1')): ?>
                         <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie1')); ?>" required>
+                        <?php else: ?>
+                        <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" required>
+                        <?php endif; ?>
                         <div id="movie1-loading" class="loading-spinner d-none position-absolute top-50 end-0 translate-middle">
                             <div class="spinner-border text-primary" role="status">
                                 <span class="sr-only">Cargando...</span>
@@ -79,9 +83,9 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        // Función para obtener sugerencias de películas
-        function fetchSuggestions(request, response) {
+    $(function() {
+        function fetchSuggestions(request, response, elementId) {
+            $(`#${elementId}-loading`).removeClass('d-none'); // Muestra el spinner de carga
             $.ajax({
                 url: 'https://api.themoviedb.org/3/search/movie',
                 dataType: 'json',
@@ -90,7 +94,7 @@
                     query: request.term
                 },
                 success: function(data) {
-                    response($.map(data.results, function(movie) {
+                    response(data.results.map(function(movie) {
                         return {
                             label: movie.title,
                             value: movie.title,
@@ -98,24 +102,36 @@
                         };
                     }));
                 },
-                error: function() {
-                    console.log('Error al obtener sugerencias');
+                complete: function() {
+                    $(`#${elementId}-loading`).addClass('d-none'); // Oculta el spinner de carga
                 }
             });
         }
 
         // Configuración de autocompletado para ambas casillas
-        $("#movie1, #movie2").autocomplete({
-            source: fetchSuggestions,
+        $("#movie1").autocomplete({
+            source: function(request, response) {
+                fetchSuggestions(request, response, 'movie1');
+            },
             select: function(event, ui) {
                 console.log("Selected movie ID:", ui.item.id);
             },
-            minLength: 3, // Empieza a sugerir después de escribir 3 caracteres
-            delay: 300 // Retardo para mostrar sugerencias
+            minLength: 3,
+            delay: 300
+        });
+
+        $("#movie2").autocomplete({
+            source: function(request, response) {
+                fetchSuggestions(request, response, 'movie2');
+            },
+            select: function(event, ui) {
+                console.log("Selected movie ID:", ui.item.id);
+            },
+            minLength: 3,
+            delay: 300
         });
     });
 </script>
-
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\jp23\Desktop\FilmGenius\resources\views/movies/match.blade.php ENDPATH**/ ?>
