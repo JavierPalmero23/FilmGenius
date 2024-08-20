@@ -2,18 +2,21 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+/*
 Route::get('/', function () {
-    return view('welcome');
+    return view('/movies.index');
 });
-
+*/
 use App\Http\Controllers\MovieController;
+Route::get('/', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 
 use App\Http\Controllers\MatchController;
 Route::get('/match', [MatchController::class, 'showForm'])->name('match.form');
 Route::post('/match/search', [MatchController::class, 'search'])->name('match.search');
 
+Route::get('/match', [MatchController::class, 'index'])->name('match.index');
+Route::post('/match/search', [MatchController::class, 'search'])->name('match.search');
 
 /*
 Route::get('/movies', function () {

@@ -76,7 +76,7 @@
                     <div class="modal-footer">
                         @auth
                         <!-- Botón de Acción para Usuarios Autenticados -->
-                        <button type="button" class="btn btn-primary">Match</button>
+                        <a href="{{ route('match.index', ['movie1' => $movie['title']]) }}" class="btn btn-primary">Match</a>
                         @endauth
                         <a href="https://www.themoviedb.org/movie/{{ $movie['id'] }}" class="btn btn-primary" target="_blank">+Info</a>
                     </div>

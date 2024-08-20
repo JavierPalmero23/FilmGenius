@@ -1,18 +1,28 @@
 
 
 <?php $__env->startSection('content'); ?>
-    <div class="container">
-        <form action="<?php echo e(route('match.search')); ?>" method="POST">
-            <?php echo csrf_field(); ?>
-            <label for="movie1">Selecciona tu película:</label>
-            <input type="text" name="movie1" id="movie1" placeholder="Buscar película" required>
-
-            <label for="movie2">Seleccionar una película:</label>
-            <input type="text" name="movie2" id="movie2" placeholder="Buscar película" required>
-
-            <button type="submit">Buscar Películas en Común</button>
-        </form>
-    </div>
+    <div class="container py-5">
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-8">
+                <div class="card p-4 shadow-lg">
+                    <h3 class="text-center mb-4">Encuentra Películas en Común</h3>
+                    <form action="<?php echo e(route('match.search')); ?>" method="POST" class="row g-3">
+                        <?php echo csrf_field(); ?>
+                        <div class="col-md-6">
+                            <label for="movie1" class="form-label">Selecciona tu película:</label>
+                            <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie1')); ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="movie2" class="form-label">Seleccionar una película:</label>
+                            <input type="text" name="movie2" id="movie2" class="form-control" placeholder="Buscar película" required>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <button type="submit" class="btn btn-primary px-5">Buscar Películas en Común</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <div class="row">
         <?php if(isset($movies)): ?>

@@ -76,7 +76,7 @@
                     <div class="modal-footer">
                         <?php if(auth()->guard()->check()): ?>
                         <!-- Botón de Acción para Usuarios Autenticados -->
-                        <button type="button" class="btn btn-primary">Match</button>
+                        <a href="<?php echo e(route('match.index', ['movie1' => $movie['title']])); ?>" class="btn btn-primary">Match</a>
                         <?php endif; ?>
                         <a href="https://www.themoviedb.org/movie/<?php echo e($movie['id']); ?>" class="btn btn-primary" target="_blank">+Info</a>
                     </div>
