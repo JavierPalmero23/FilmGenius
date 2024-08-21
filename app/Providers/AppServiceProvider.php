@@ -19,8 +19,12 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot() {
-        if(config('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::except([
+            '/*',
+            '/movies/*',
+            '/match/*',
+            '/recommend/*',
+            '/contact/*',
+        ]);
     }
 }
