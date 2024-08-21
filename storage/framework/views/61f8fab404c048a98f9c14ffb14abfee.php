@@ -3,7 +3,7 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="container">
-    <h1><?php echo e($type === 'alphabetical' ? 'Alfabeticamente' : ($type === 'category' ?  $categoryName : 'Popular')); ?></h1>
+    <h1 style="color: #6d0774;"><?php echo e($type === 'alphabetical' ? 'Alfabeticamente' : ($type === 'category' ?  'Peliculas de '.$categoryName : 'Peliculas Populares')); ?></h1>
 
     <!-- Botones para cambiar entre popular, alfabético y categoría -->
     <div class="mb-3 d-flex align-items-center">
@@ -11,48 +11,49 @@
     <a href="<?php echo e(route('movies.index', ['type' => 'alphabetical', 'page' => $currentPage])); ?>" class="btn btn-secondary mr-2">Alfabeticamente</a>
 
     <!-- Selección de categoría -->
-    <select onchange="location = this.value;" class="btn btn-outline-dark mr-2">
+    <select onchange="location = this.value;" class="btn btn-outline-dark mr-2" style="color:#6d0774; background-color:#1a202c;">
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => null])); ?>" <?php echo e(is_null($categoryId) ? 'selected' : ''); ?>>Todas</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 16])); ?>" <?php echo e($categoryId == 16 ? 'selected' : ''); ?>>Animacion</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 28])); ?>" <?php echo e($categoryId == 28 ? 'selected' : ''); ?>>Acción</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 12])); ?>" <?php echo e($categoryId == 12 ? 'selected' : ''); ?>>Aventura</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 28])); ?>" <?php echo e($categoryId == 28 ? 'selected' : ''); ?>>Accion</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 16])); ?>" <?php echo e($categoryId == 16 ? 'selected' : ''); ?>>Animación</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 35])); ?>" <?php echo e($categoryId == 35 ? 'selected' : ''); ?>>Comedia</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 80])); ?>" <?php echo e($categoryId == 80 ? 'selected' : ''); ?>>Crimen</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 99])); ?>" <?php echo e($categoryId == 99 ? 'selected' : ''); ?>>Documental</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 18])); ?>" <?php echo e($categoryId == 18 ? 'selected' : ''); ?>>Drama</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10751])); ?>" <?php echo e($categoryId == 10751 ? 'selected' : ''); ?>>Familiar</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 14])); ?>" <?php echo e($categoryId == 14 ? 'selected' : ''); ?>>Fantasia</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 14])); ?>" <?php echo e($categoryId == 14 ? 'selected' : ''); ?>>Fantasía</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 36])); ?>" <?php echo e($categoryId == 36 ? 'selected' : ''); ?>>Historia</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 27])); ?>" <?php echo e($categoryId == 27 ? 'selected' : ''); ?>>Horror</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10402])); ?>" <?php echo e($categoryId == 10402 ? 'selected' : ''); ?>>Musical</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10402])); ?>" <?php echo e($categoryId == 10402 ? 'selected' : ''); ?>>Música</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 9648])); ?>" <?php echo e($categoryId == 9648 ? 'selected' : ''); ?>>Misterio</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10749])); ?>" <?php echo e($categoryId == 10749 ? 'selected' : ''); ?>>Romance</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 878])); ?>" <?php echo e($categoryId == 878 ? 'selected' : ''); ?>>Ciencia Ficcion</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10770])); ?>" <?php echo e($categoryId == 10770 ? 'selected' : ''); ?>>De Serie A Pelicula</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 878])); ?>" <?php echo e($categoryId == 878 ? 'selected' : ''); ?>>Ciencia Ficción</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10770])); ?>" <?php echo e($categoryId == 10770 ? 'selected' : ''); ?>>De Serie a Película</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 53])); ?>" <?php echo e($categoryId == 53 ? 'selected' : ''); ?>>Suspenso</option>
         <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 10752])); ?>" <?php echo e($categoryId == 10752 ? 'selected' : ''); ?>>Guerra</option>
-        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 37])); ?>" <?php echo e($categoryId == 37 ? 'selected' : ''); ?>>Vaqueeros</option>
+        <option value="<?php echo e(route('movies.index', ['type' => 'category', 'page' => 1, 'category' => 37])); ?>" <?php echo e($categoryId == 37 ? 'selected' : ''); ?>>Western</option>
     </select>
+
 
     <!-- Formulario de búsqueda -->
     <form method="GET" action="<?php echo e(route('movies.index')); ?>" class="d-flex align-items-center">
-        <input type="text" name="search" class="form-control mr-2" placeholder="Search for movies..." value="<?php echo e($searchQuery); ?>">
+        <input type="text" name="search" class="form-control mr-2" placeholder="Buscar Pelicula..." value="<?php echo e($searchQuery); ?>">
         <input type="hidden" name="type" value="<?php echo e($type); ?>">
         <input type="hidden" name="category" value="<?php echo e($categoryId); ?>">
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn btn-primary" type="submit">Buscar</button>
     </form>
 </div>
 
     <div class="row">
         <?php $__currentLoopData = $tmdbMovies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="col-md-3 mb-4">
-            <div class="card">
+            <div class="card" style="background-color: #1d021f; width: 100%; height: 100%;">
                 <a data-toggle="modal" data-target="#movieModal<?php echo e($movie['id']); ?>">
                     <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="card-img-top" alt="<?php echo e($movie['title']); ?>">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo e($movie['title']); ?></h5>
-                        <p class="card-text">
-                            Rating: <?php echo e(number_format($movie['vote_average'], 1)); ?>/10
+                        <h5 class="card-title" style="color: #FFFFFF;"><?php echo e($movie['title']); ?></h5>
+                        <p class="card-text" style="color: #FFFFFF;">
+                            Calificación: <b style="color: #bd0cc9;"><?php echo e(number_format($movie['vote_average'], 1)); ?></b>/10
                         </p>
                 </a>
             </div>
@@ -61,24 +62,25 @@
         <!-- Modal -->
         <div class="modal fade" id="movieModal<?php echo e($movie['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel<?php echo e($movie['id']); ?>" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="background-color: #1d021f;">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="movieModalLabel<?php echo e($movie['id']); ?>"><?php echo e($movie['title']); ?></h5>
+                        <h5 class="modal-title" id="movieModalLabel<?php echo e($movie['id']); ?>" style="color: #FFFFFF;"><?php echo e($movie['title']); ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="img-fluid mb-3" alt="<?php echo e($movie['title']); ?>">
-                        <p><strong>Rating:</strong> <?php echo e(number_format($movie['vote_average'], 1)); ?>/10</p>
-                        <p><strong>Overview:</strong> <?php echo e($movie['overview']); ?></p>
+                        <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="img-fluid mb-3 text-center" alt="<?php echo e($movie['title']); ?>">
+                        <p style="color: #FFFFFF;"><strong>Calificación:</strong> <b style="color: #bd0cc9;"><?php echo e(number_format($movie['vote_average'], 1)); ?></b>/10</p>
+                        <p style="color: #FFFFFF;"><strong>Sinopsis:</strong> <?php echo e($movie['overview']); ?></p>
                     </div>
                     <div class="modal-footer">
                         <?php if(auth()->guard()->check()): ?>
                         <!-- Botón de Acción para Usuarios Autenticados -->
-                        <a href="<?php echo e(route('match.index', ['movie1' => $movie['title']])); ?>" class="btn btn-primary">Match</a>
+                        <a href="<?php echo e(route('movies.recommend.now', ['movie' => $movie['title']])); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;">Recomendaciones</a>
+                        <a href="<?php echo e(route('match.index', ['movie1' => $movie['title']])); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;">Match</a>
                         <?php endif; ?>
-                        <a href="https://www.themoviedb.org/movie/<?php echo e($movie['id']); ?>" class="btn btn-primary" target="_blank">+Info</a>
+                        <a href="https://www.themoviedb.org/movie/<?php echo e($movie['id']); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;" target="_blank">+Info</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +96,7 @@
         <!-- Botón Anterior -->
         <?php if($currentPage > 1): ?>
         <li class="page-item">
-            <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($currentPage - 1); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>" aria-label="Previous">
+            <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($currentPage - 1); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo; Anterior</span>
             </a>
         </li>
@@ -103,11 +105,11 @@
         <!-- Primera Página -->
         <?php if($currentPage > 4): ?>
         <li class="page-item">
-            <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=1&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>">1</a>
+            <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=1&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>">1</a>
         </li>
         <?php if($currentPage > 5): ?>
         <li class="page-item disabled">
-            <span class="page-link">...</span>
+            <span class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;">...</span>
         </li>
         <?php endif; ?>
         <?php endif; ?>
@@ -115,19 +117,19 @@
         <!-- Páginas Iniciales -->
         <?php for($i = max(2, $currentPage - 2); $i < $currentPage; $i++): ?>
             <li class="page-item">
-            <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($i); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e($i); ?></a>
+            <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($i); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e($i); ?></a>
             </li>
             <?php endfor; ?>
 
             <!-- Página Actual -->
             <li class="page-item active">
-                <span class="page-link"><?php echo e($currentPage); ?></span>
+                <span class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;"><?php echo e($currentPage); ?></span>
             </li>
 
             <!-- Páginas Siguientes -->
             <?php for($i = $currentPage + 1; $i <= min($currentPage + 2, min(500, $totalPages)); $i++): ?>
                 <li class="page-item">
-                <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($i); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e($i); ?></a>
+                <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($i); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e($i); ?></a>
                 </li>
                 <?php endfor; ?>
 
@@ -135,18 +137,18 @@
                 <?php if($currentPage < min(500, $totalPages) - 3): ?>
                     <?php if($currentPage < min(500, $totalPages) - 4): ?>
                     <li class="page-item disabled">
-                    <span class="page-link">...</span>
+                    <span class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;">...</span>
                     </li>
                     <?php endif; ?>
                     <li class="page-item">
-                        <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e(min(500, $totalPages)); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e(min(500, $totalPages)); ?></a>
+                        <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e(min(500, $totalPages)); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>"><?php echo e(min(500, $totalPages)); ?></a>
                     </li>
                     <?php endif; ?>
 
                     <!-- Botón Siguiente -->
                     <?php if($currentPage < min(500, $totalPages)): ?>
                         <li class="page-item">
-                        <a class="page-link" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($currentPage + 1); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>" aria-label="Next">
+                        <a class="page-link px-4" style="background-color: #6d0774; color: #FFFFFF;" href="?<?php if($searchQuery): ?>search=<?php echo e($searchQuery); ?><?php endif; ?>&page=<?php echo e($currentPage + 1); ?>&type=<?php echo e($type); ?><?php if($categoryId): ?> &category=<?php echo e($categoryId); ?> <?php endif; ?>" aria-label="Next">
                             <span aria-hidden="true">Siguiente &raquo;</span>
                         </a>
                         </li>

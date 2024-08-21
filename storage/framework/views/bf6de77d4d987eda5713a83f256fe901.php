@@ -4,12 +4,12 @@
 <div class="container py-5">
     <div class="row justify-content-center mb-4">
         <div class="col-md-8">
-            <div class="card p-4 shadow-lg">
-                <h3 class="text-center mb-4">Encuentra Películas en Común</h3>
+            <div class="card p-4 shadow-lg" style="background-color: #1d021f;">
+                <h3 class="text-center mb-4" style="color: #bd0cc9;">Encuentra Películas en Común</h3>
                 <form action="<?php echo e(route('match.search')); ?>" method="POST" class="row g-3">
                     <?php echo csrf_field(); ?>
                     <div class="col-md-6 position-relative">
-                        <label for="movie1" class="form-label">Selecciona tu película:</label>
+                        <label for="movie1" class="form-label" style="color: #bd0cc9;">Selecciona tu película:</label>
                         <?php if(request('movie1')): ?>
                         <input type="text" name="movie1" id="movie1" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie1')); ?>" required>
                         <?php else: ?>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 position-relative">
-                        <label for="movie2" class="form-label">Seleccionar una película:</label>
+                        <label for="movie2" class="form-label" style="color: #bd0cc9;">Seleccionar una película:</label>
                         <input type="text" name="movie2" id="movie2" class="form-control" placeholder="Buscar película" value="<?php echo e(request('movie2')); ?>" required>
                         <div id="movie2-loading" class="loading-spinner d-none position-absolute top-50 end-0 translate-middle">
                             <div class="spinner-border text-primary" role="status">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-center mt-4">
-                        <button type="submit" class="btn btn-primary px-5">Buscar Películas en Común</button>
+                        <button type="submit" class="btn btn-light px-5" style="background-color: #6d0774; color: #FFFFFF;">Buscar Películas en Común</button>
                     </div>
                 </form>
             </div>
@@ -40,44 +40,51 @@
 
     <div class="row">
         <?php if(isset($movies)): ?>
-            <?php if(count($movies) > 0): ?>
-                <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-md-3 mb-4">
-                        <div class="card">
-                            <a data-toggle="modal" data-target="#movieModal<?php echo e($movie['id']); ?>">
-                                <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="card-img-top" alt="<?php echo e($movie['title']); ?>">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo e($movie['title']); ?></h5>
-                                    <p class="card-text">Rating: <?php echo e(number_format($movie['vote_average'], 1)); ?>/10</p>
-                                </div>
-                            </a>
-                        </div>
+        <?php if(count($movies) > 0): ?>
+        <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="col-md-3 mb-4">
+            <div class="card" style="background-color: #1d021f; width: 100%; height: 100%;">
+                <a data-toggle="modal" data-target="#movieModal<?php echo e($movie['id']); ?>">
+                    <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="card-img-top" alt="<?php echo e($movie['title']); ?>">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: #FFFFFF;"><?php echo e($movie['title']); ?></h5>
+                        <p class="card-text" style="color: #FFFFFF;">
+                            Calificación: <b style="color: #bd0cc9;"><?php echo e(number_format($movie['vote_average'], 1)); ?></b>/10
+                        </p>
                     </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="movieModal<?php echo e($movie['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel<?php echo e($movie['id']); ?>" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="movieModalLabel<?php echo e($movie['id']); ?>"><?php echo e($movie['title']); ?></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="img-fluid mb-3" alt="<?php echo e($movie['title']); ?>">
-                                    <p><strong>Rating:</strong> <?php echo e(number_format($movie['vote_average'], 1)); ?>/10</p>
-                                    <p><strong>Overview:</strong> <?php echo e($movie['overview']); ?></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="https://www.themoviedb.org/movie/<?php echo e($movie['id']); ?>" class="btn btn-primary" target="_blank">+Info</a>
-                                </div>
-                            </div>
-                        </div>
+                </a>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="movieModal<?php echo e($movie['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel<?php echo e($movie['id']); ?>" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: #1d021f;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="movieModalLabel<?php echo e($movie['id']); ?>" style="color: #FFFFFF;"><?php echo e($movie['title']); ?></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php else: ?>
-                <p class="text-muted">No se encontraron películas en común.</p>
-            <?php endif; ?>
+                    <div class="modal-body">
+                        <img src="https://image.tmdb.org/t/p/w500/<?php echo e($movie['poster_path']); ?>" class="img-fluid mb-3 text-center" alt="<?php echo e($movie['title']); ?>">
+                        <p style="color: #FFFFFF;"><strong>Calificación:</strong> <b style="color: #bd0cc9;"><?php echo e(number_format($movie['vote_average'], 1)); ?></b>/10</p>
+                        <p style="color: #FFFFFF;"><strong>Sinopsis:</strong> <?php echo e($movie['overview']); ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <?php if(auth()->guard()->check()): ?>
+                        <!-- Botón de Acción para Usuarios Autenticados -->
+                        <a href="<?php echo e(route('movies.recommend.now', ['movie' => $movie['title']])); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;">Recomendaciones</a>
+                        <a href="<?php echo e(route('match.index', ['movie1' => $movie['title']])); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;">Match</a>
+                        <?php endif; ?>
+                        <a href="https://www.themoviedb.org/movie/<?php echo e($movie['id']); ?>" class="btn btn-light px-4" style="background-color: #6d0774; color: #FFFFFF;" target="_blank">+Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php else: ?>
+        <p class="text-muted">No se encontraron películas en común.</p>
+        <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>
@@ -90,7 +97,7 @@
                 url: 'https://api.themoviedb.org/3/search/movie',
                 dataType: 'json',
                 data: {
-                    api_key: '<?php echo e(env('TMDB_API_KEY')); ?>',
+                    api_key: '<?php echo e(env('TMDB_API_KEY ')); ?>',
                     query: request.term
                 },
                 success: function(data) {
@@ -133,5 +140,4 @@
     });
 </script>
 <?php $__env->stopSection(); ?>
-
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\jp23\Desktop\FilmGenius\resources\views/movies/match.blade.php ENDPATH**/ ?>

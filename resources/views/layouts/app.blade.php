@@ -21,14 +21,14 @@
 
 </head>
 
-<body class="bg-secondary">
+<body style="background-color: #1a202c;">
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6d0774;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">FilmGenius</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,10 +43,13 @@
                         <a class="nav-link" href="#">Situaciones</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/recommend">Recomendaciones</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/match">Match</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
+                        <a class="nav-link" href="{{ route('contact') }}">Contacto</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
