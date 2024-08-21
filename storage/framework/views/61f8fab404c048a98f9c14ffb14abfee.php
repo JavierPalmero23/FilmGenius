@@ -7,8 +7,8 @@
 
     <!-- Botones para cambiar entre popular, alfabético y categoría -->
     <div class="mb-3 d-flex align-items-center">
-    <a href="<?php echo e(route('movies.index', ['type' => 'popular', 'page' => $currentPage])); ?>" class="btn btn-primary mr-2">Popular</a>
-    <a href="<?php echo e(route('movies.index', ['type' => 'alphabetical', 'page' => $currentPage])); ?>" class="btn btn-secondary mr-2">Alfabeticamente</a>
+    <a href="<?php echo e(route('movies.index', ['type' => 'popular', 'page' => 1, 'category' => $categoryId])); ?>" class="btn btn-primary mr-2">Popular</a>
+    <a href="<?php echo e(route('movies.index', ['type' => 'alphabetical', 'page' => 1, 'category' => $categoryId])); ?>" class="btn btn-secondary mr-2">Alfabeticamente</a>
 
     <!-- Selección de categoría -->
     <select onchange="location = this.value;" class="btn btn-outline-dark mr-2" style="color:#6d0774; background-color:#1a202c;">

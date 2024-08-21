@@ -35,6 +35,21 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('contact_messages', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->text('message');
+            $table->timestamps();  // Agrega columnas de created_at y updated_at automáticamente
+        });
+
+        Schema::create('user_movies', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('movie_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -42,6 +57,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('user_movies');
+        Schema::dropIfExists('contact_messages');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

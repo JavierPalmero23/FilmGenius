@@ -30,9 +30,10 @@ Route::middleware('auth')->group(function () {
 });// routes/web.php
 
 use App\Http\Controllers\ContactController;
-
 Route::get('/contact', [ContactController::class, 'showContactForm'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submitContactForm'])->name('contact.submit');
+Route::get('/contact/messages', [ContactController::class, 'listMessages'])->name('contact.messages');
+
 
 /*
 Route::get('/movies', function () {
